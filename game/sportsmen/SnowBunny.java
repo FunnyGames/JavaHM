@@ -54,14 +54,14 @@ public class SnowBunny {
      * @return true if crossed the finish line, false otherwise
      */
     public boolean move(Point finish, double friction) {
-        if (currentSpeed < maxSpeed) {
-            currentSpeed += acceleration * friction;
-            if (currentSpeed > maxSpeed) {
-                currentSpeed = maxSpeed;
+        if (getCurrentSpeed() < getMaxSpeed()) {
+            setCurrentSpeed(getCurrentSpeed() + getAcceleration() * friction);
+            if (getCurrentSpeed() > getMaxSpeed()) {
+                setCurrentSpeed(getMaxSpeed());
             }
         }
 
-        currentLocation.setX(currentLocation.getX() + currentSpeed);
+        currentLocation.setX(currentLocation.getX() + getCurrentSpeed());
         return currentLocation.getX() >= finish.getX();
     }
 
@@ -79,6 +79,62 @@ public class SnowBunny {
 
     public String getLeague() {
         return league;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getAcceleration() {
+        return acceleration;
+    }
+
+    public void setAcceleration(double acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public double getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    public void setMaxSpeed(double maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+
+    public Point getCurrentLocation() {
+        return currentLocation;
+    }
+
+    public void setCurrentLocation(Point currentLocation) {
+        this.currentLocation = currentLocation;
+    }
+
+    public double getCurrentSpeed() {
+        return currentSpeed;
+    }
+
+    public void setCurrentSpeed(double currentSpeed) {
+        this.currentSpeed = currentSpeed;
+    }
+
+    public void setQualification(String qualification) {
+        this.qualification = qualification;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setAge(double age) {
+        this.age = age;
+    }
+
+    public void setLeague(String league) {
+        this.league = league;
     }
 
     @Override

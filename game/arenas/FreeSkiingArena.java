@@ -127,4 +127,24 @@ public class FreeSkiingArena {
     public String getDiscipline() {
         return discipline;
     }
+
+    public void setStart(Point start) {
+        this.start = start;
+    }
+
+    public void setFinish(Point finish) {
+        this.finish = finish;
+    }
+
+    public void setSurface(String surface) {
+        this.surface = surface;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
+    public void setDiscipline(String discipline) {
+        this.discipline = discipline;
+    }
 }
