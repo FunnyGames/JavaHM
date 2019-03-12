@@ -43,16 +43,8 @@ public class Point {
      * @param y second coordinate
      */
     public Point(double x, double y) {
-        if (x >= MIN_X && x <= MAX_X) {
-            this.x = x;
-        } else {
-            this.x = 0;
-        }
-        if (y >= MIN_Y && y <= MAX_Y) {
-            this.y = y;
-        } else {
-            this.y = 0;
-        }
+        setX(x);
+        setY(y);
     }
 
     /**
