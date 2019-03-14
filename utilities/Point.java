@@ -108,4 +108,22 @@ public class Point {
     public String toString() {
         return "(" + getX() + "," +getY() + ")";
     }
+
+    /**
+     * Returns true weather the other object is Point and has the same coordinates.
+     * @param other the object to compare with
+     * @return true if both x and y are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this)
+            return true;
+
+        if (!(other instanceof Point)) {
+            return false;
+        }
+
+        Point p = (Point) other;
+        return this.x == p.x && this.y == p.y;
+    }
 }

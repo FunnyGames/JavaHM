@@ -81,11 +81,11 @@ public class GameEngine {
     /**
      * Adds new racer to the competition.
      * The competition will check if the racers is a valid racer before adding.
-     * @param object the sportsmen to add to competition
+     * @param newRacer the sportsman to add to competition
      * @return true if succeed, false otherwise
      */
-    public boolean addRacer(Object object) {
-        return competition.add(object);
+    public boolean addRacer(Object newRacer) {
+        return competition.add(newRacer);
     }
 
     /**

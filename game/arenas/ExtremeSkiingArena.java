@@ -1,7 +1,7 @@
 package game.arenas;
 
 import game.sportsmen.Skier;
-import game.sportsmen.Snowboarder;
+import game.sportsmen.Showboarder;
 import game.sportsmen.SunshineSkier;
 import utilities.Point;
 
@@ -14,7 +14,7 @@ public class ExtremeSkiingArena {
     /**
      * The friction of the arena.
      */
-    private static final double FRICTION = 0.4;
+    private static final double FRICTION = 0.7;
 
     /**
      * Maximum racers allowed in this arena.
@@ -23,7 +23,7 @@ public class ExtremeSkiingArena {
 
     private ArrayList<Skier> skiers;
     private ArrayList<SunshineSkier> shSkiers;
-    private ArrayList<Snowboarder> snSkiers;
+    private ArrayList<Showboarder> snSkiers;
     private Point start;
     private Point finish;
     private ArrayList<Object> finished;
@@ -82,7 +82,7 @@ public class ExtremeSkiingArena {
      * @param skier the sportsman to add
      * @return true if racer was added, false otherwise
      */
-    public boolean add(Snowboarder skier) {
+    public boolean add(Showboarder skier) {
         if (skiers.size() + shSkiers.size() + snSkiers.size() < MAX_RACERS) {
             snSkiers.add(skier);
             return true;
@@ -120,7 +120,7 @@ public class ExtremeSkiingArena {
      * @param skier the racer that crossed the finish line
      * @return the place of the racer
      */
-    public int crossFinishLine(Snowboarder skier) {
+    public int crossFinishLine(Showboarder skier) {
         snSkiers.remove(skier);
         finished.add(skier);
         return finished.size();
@@ -136,7 +136,7 @@ public class ExtremeSkiingArena {
         for (SunshineSkier skier : shSkiers) {
             skier.initRace(start);
         }
-        for (Snowboarder skier : snSkiers) {
+        for (Showboarder skier : snSkiers) {
             skier.initRace(start);
         }
     }
@@ -152,26 +152,23 @@ public class ExtremeSkiingArena {
         }
         ArrayList<Skier> finSkiers = new ArrayList<>();
         ArrayList<SunshineSkier> finSuns = new ArrayList<>();
-        ArrayList<Snowboarder> finBoarders = new ArrayList<>();
+        ArrayList<Showboarder> finBoarders = new ArrayList<>();
         for (Skier skier : skiers) {
-            if (skier.move(finish, FRICTION)) {
+            if (!skier.move(finish, FRICTION)) {
+                System.out.println("Yaaay " + skier.getName() + " crossed finish line!");
                 finSkiers.add(skier);
-            } else {
-                System.out.println(skier);
             }
         }
         for (SunshineSkier skier : shSkiers) {
-            if (skier.move(finish, FRICTION)) {
+            if (!skier.move(finish, FRICTION)) {
+                System.out.println("Yaaay " + skier.getName() + " crossed finish line!");
                 finSuns.add(skier);
-            } else {
-                System.out.println(skier);
             }
         }
-        for (Snowboarder skier : snSkiers) {
-            if (skier.move(finish, FRICTION)) {
+        for (Showboarder skier : snSkiers) {
+            if (!skier.move(finish, FRICTION)) {
+                System.out.println("Yaaay " + skier.getName() + " crossed finish line!");
                 finBoarders.add(skier);
-            } else {
-                System.out.println(skier);
             }
         }
         for (Skier skier : finSkiers) {
@@ -180,17 +177,39 @@ public class ExtremeSkiingArena {
         for (SunshineSkier skier : finSuns) {
             crossFinishLine(skier);
         }
-        for (Snowboarder skier : finBoarders) {
+        for (Showboarder skier : finBoarders) {
             crossFinishLine(skier);
         }
         return true;
     }
 
+    /**
+     * Returns the details of the arena.
+     * @return details of the arena
+     */
     @Override
     public String toString() {
         return "ExtremeSkiingArea(" + start + "," + finish + "," + surface + "," + condition + "," + discipline + ")";
     }
 
+    /**
+     * Returns weather the object is arena and has the same details.
+     * @param other the object to compare with
+     * @return true if all details are the same, false otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this)
+            return true;
+
+        if (!(other instanceof ExtremeSkiingArena))
+            return false;
+
+        ExtremeSkiingArena a = (ExtremeSkiingArena) other;
+
+        return start == a.start && finish == a.finish && surface.equals(a.surface) && condition.equals(a.condition) &&
+                discipline.equals(a.discipline);
+    }
 
     public Point getStart() {
         return start;

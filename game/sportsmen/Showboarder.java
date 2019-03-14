@@ -7,7 +7,7 @@ import utilities.Point;
  * Contains name, gender, qualification, age and league.
  * Also has speed limit and acceleration.
  */
-public class Snowboarder {
+public class Showboarder {
     private String name;
     private double acceleration;
     private double maxSpeed;
@@ -28,7 +28,7 @@ public class Snowboarder {
      * @param gender racer's gender
      * @param league racer's league
      */
-    public Snowboarder(String name, double maxSpeed, double age, double acceleration, String qualification, String gender, String league) {
+    public Showboarder(String name, double maxSpeed, double age, double acceleration, String qualification, String gender, String league) {
         this.name = name;
         this.maxSpeed = maxSpeed;
         this.age = age;
@@ -36,6 +36,7 @@ public class Snowboarder {
         this.qualification = qualification;
         this.gender = gender;
         this.league = league;
+        this.currentSpeed = 0;
     }
 
     /**
@@ -44,7 +45,6 @@ public class Snowboarder {
      */
     public void initRace(Point start) {
         currentLocation = new Point(start);
-        currentSpeed = 0;
     }
 
     /**
@@ -62,7 +62,8 @@ public class Snowboarder {
         }
 
         currentLocation.setX(currentLocation.getX() + getCurrentSpeed());
-        return currentLocation.getX() >= finish.getX();
+        System.out.println(this);
+        return currentLocation.getX() < finish.getX();
     }
 
     public double getAge() {
@@ -137,9 +138,31 @@ public class Snowboarder {
         this.league = league;
     }
 
+    /**
+     * Returns a string contains name of racer, their location and speed.
+     * @return name, location and speed
+     */
     @Override
     public String toString() {
         return name + " My Location is " + currentLocation + " My speed is " + currentSpeed;
     }
 
+    /**
+     * Returns weather the object is a racer and has the same racer details.
+     * @param other the object to compare with
+     * @return true if the details are the same, false otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this)
+            return true;
+
+        if (!(other instanceof Showboarder))
+            return false;
+
+        Showboarder o = (Showboarder) other;
+
+        return name.equals(o.name) && age == o.age && maxSpeed == o.maxSpeed && acceleration == o.acceleration &&
+                qualification.equals(o.qualification) && league.equals(o.league) && gender.equals(o.gender);
+    }
 }

@@ -155,24 +155,21 @@ public class AlpineSkiingArena {
         ArrayList<SunshineSkier> finSkier = new ArrayList<>();
         ArrayList<Snowbiker> finBiker = new ArrayList<>();
         for (SnowBunny skier : snowBunnies) {
-            if (skier.move(finish, FRICTION)) {
+            if (!skier.move(finish, FRICTION)) {
+                System.out.println("Yaaay " + skier.getName() + " crossed finish line!");
                 finBunny.add(skier);
-            } else {
-                System.out.println(skier);
             }
         }
         for (SunshineSkier skier : shSkiers) {
-            if (skier.move(finish, FRICTION)) {
+            if (!skier.move(finish, FRICTION)) {
+                System.out.println("Yaaay " + skier.getName() + " crossed finish line!");
                 finSkier.add(skier);
-            } else {
-                System.out.println(skier);
             }
         }
         for (Snowbiker skier : snowbikers) {
-            if (skier.move(finish, FRICTION)) {
+            if (!skier.move(finish, FRICTION)) {
+                System.out.println("Yaaay " + skier.getName() + " crossed finish line!");
                 finBiker.add(skier);
-            } else {
-                System.out.println(skier);
             }
         }
         for (SnowBunny skier : finBunny) {
@@ -187,9 +184,32 @@ public class AlpineSkiingArena {
         return true;
     }
 
+    /**
+     * Returns the details of the arena.
+     * @return details of the arena
+     */
     @Override
     public String toString() {
         return "AlpineSkiingArea(" + start + "," + finish + "," + surface + "," + condition + "," + discipline + ")";
+    }
+
+    /**
+     * Returns weather the object is arena and has the same details.
+     * @param other the object to compare with
+     * @return true if all details are the same, false otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this)
+            return true;
+
+        if (!(other instanceof AlpineSkiingArena))
+            return false;
+
+        AlpineSkiingArena a = (AlpineSkiingArena) other;
+
+        return start == a.start && finish == a.finish && surface.equals(a.surface) && condition.equals(a.condition) &&
+                discipline.equals(a.discipline);
     }
 
     public ArrayList<Object> getFinished() {

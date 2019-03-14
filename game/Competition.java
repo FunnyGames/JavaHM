@@ -21,15 +21,23 @@ public class Competition {
     /**
      * Sets the details about the competition.
      * @param minAge minimum age to enter
-     * @param league the league
-     * @param gender the gender
-     * @param qualification the qualification
+     * @param league the league to join
+     * @param gender the gender to join
+     * @param qualification the qualification to join
      */
     public Competition(double minAge, String league, String gender, String qualification) {
         this.minAge = minAge;
         this.league = league;
         this.gender = gender;
         this.qualification = qualification;
+    }
+
+    /**
+     * Copies the details about the competition from another competition.
+     * @param comp the competition to make a copy from
+     */
+    public Competition(Competition comp) {
+        this(comp.minAge, comp.league, comp.gender, comp.qualification);
     }
 
     /**
@@ -51,8 +59,8 @@ public class Competition {
     }
 
     /**
-     * Sets the arena.
-     * @param arena the arena
+     * Sets the arena instance and type.
+     * @param arena the arena object
      * @return true if a valid arena, false otherwise
      */
     public boolean setArena(Object arena) {
@@ -101,7 +109,7 @@ public class Competition {
      * @param comp the racer
      * @return true if valid for the arena, false otherwise
      */
-    public boolean validCompetitor(Snowboarder comp) {
+    public boolean validCompetitor(Showboarder comp) {
         if (comp.getAge() < getMinAge()) return false;
         if (!comp.getGender().equals(getGender())) return false;
         return true;
@@ -208,7 +216,7 @@ public class Competition {
      * @param comp the racer
      * @return true if valid for the arena, false otherwise
      */
-    public boolean add(Snowboarder comp) {
+    public boolean add(Showboarder comp) {
         if (validCompetitor(comp)) {
             switch (arenaType) {
                 case ExtremeSkiingArena:
@@ -303,6 +311,11 @@ public class Competition {
         return league;
     }
 
+    /**
+     * Adds the racer to competition if is a valid racer.
+     * @param object the racer
+     * @return true if valid for the arena, false otherwise
+     */
     public boolean add(Object object) {
         if (object instanceof Skier) {
             return add((Skier) object);
@@ -313,8 +326,8 @@ public class Competition {
         if (object instanceof Snowbiker) {
             return add((Snowbiker) object);
         }
-        if (object instanceof Snowboarder) {
-            return add((Snowboarder) object);
+        if (object instanceof Showboarder) {
+            return add((Showboarder) object);
         }
         if (object instanceof SnowBunny) {
             return add((SnowBunny) object);
@@ -325,9 +338,32 @@ public class Competition {
         return false;
     }
 
+    /**
+     * Returns the details of the competition.
+     * @return details of the competition
+     */
     @Override
     public String toString() {
         return "Competition(" + arenaType + "," + minAge + "," + league + "," + gender + "," + qualification + ")";
+    }
+
+    /**
+     * Returns weather the object is competition and has the same details.
+     * @param other the object to compare with
+     * @return true if all details of competition are the same, false otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this)
+            return true;
+
+        if (!(other instanceof Competition))
+            return false;
+
+        Competition c = (Competition) other;
+
+        return minAge == c.minAge && arenaType == c.arenaType && league.equals(c.league) &&
+                gender.equals(c.gender) && qualification.equals(c.qualification);
     }
 
 }

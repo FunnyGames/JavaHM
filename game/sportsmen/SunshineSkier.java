@@ -36,6 +36,7 @@ public class SunshineSkier {
         this.qualification = qualification;
         this.gender = gender;
         this.league = league;
+        this.currentSpeed = 0;
     }
 
     /**
@@ -44,7 +45,6 @@ public class SunshineSkier {
      */
     public void initRace(Point start) {
         currentLocation = new Point(start);
-        currentSpeed = 0;
     }
 
     /**
@@ -62,7 +62,8 @@ public class SunshineSkier {
         }
 
         currentLocation.setX(currentLocation.getX() + getCurrentSpeed());
-        return currentLocation.getX() >= finish.getX();
+        System.out.println(this);
+        return currentLocation.getX() < finish.getX();
     }
 
     public double getAge() {
@@ -137,8 +138,31 @@ public class SunshineSkier {
         this.league = league;
     }
 
+    /**
+     * Returns a string contains name of racer, their location and speed.
+     * @return name, location and speed
+     */
     @Override
     public String toString() {
         return name + " My Location is " + currentLocation + " My speed is " + currentSpeed;
+    }
+
+    /**
+     * Returns weather the object is a racer and has the same racer details.
+     * @param other the object to compare with
+     * @return true if the details are the same, false otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this)
+            return true;
+
+        if (!(other instanceof SunshineSkier))
+            return false;
+
+        SunshineSkier o = (SunshineSkier) other;
+
+        return name.equals(o.name) && age == o.age && maxSpeed == o.maxSpeed && acceleration == o.acceleration &&
+                qualification.equals(o.qualification) && league.equals(o.league) && gender.equals(o.gender);
     }
 }

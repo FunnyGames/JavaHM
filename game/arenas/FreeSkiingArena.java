@@ -91,10 +91,9 @@ public class FreeSkiingArena {
         }
         ArrayList<OldTimer> finTimers = new ArrayList<>();
         for (OldTimer skier : skiers) {
-            if (skier.move(finish, FRICTION)) {
+            if (!skier.move(finish, FRICTION)) {
+                System.out.println("Yaaay " + skier.getName() + " crossed finish line!");
                 finTimers.add(skier);
-            } else {
-                System.out.println(skier);
             }
         }
         for (OldTimer skier : finTimers) {
@@ -103,9 +102,32 @@ public class FreeSkiingArena {
         return true;
     }
 
+    /**
+     * Returns the details of the arena.
+     * @return details of the arena
+     */
     @Override
     public String toString() {
         return "FreeSkiingArea(" + start + "," + finish + "," + surface + "," + condition + "," + discipline + ")";
+    }
+
+    /**
+     * Returns weather the object is arena and has the same details.
+     * @param other the object to compare with
+     * @return true if all details are the same, false otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this)
+            return true;
+
+        if (!(other instanceof FreeSkiingArena))
+            return false;
+
+        FreeSkiingArena a = (FreeSkiingArena) other;
+
+        return start == a.start && finish == a.finish && surface.equals(a.surface) && condition.equals(a.condition) &&
+                discipline.equals(a.discipline);
     }
 
     public Point getStart() {
