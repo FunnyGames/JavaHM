@@ -86,9 +86,10 @@ public class FreeSkiingArena {
      * @return true if there are still racers racing, false otherwise
      */
     public boolean playTurn() {
-        if (skiers.size() == 0) {
+        if (getNumOfRacers() == 0) {
             return false;
         }
+
         ArrayList<OldTimer> finTimers = new ArrayList<>();
         for (OldTimer skier : skiers) {
             if (!skier.move(finish, FRICTION)) {
@@ -100,6 +101,14 @@ public class FreeSkiingArena {
             crossFinishLine(skier);
         }
         return true;
+    }
+
+    /**
+     * Returns the number of active racers that didn't finish the line yet.
+     * @return the number of active racers
+     */
+    private int getNumOfRacers() {
+        return skiers.size();
     }
 
     /**

@@ -148,7 +148,7 @@ public class AlpineSkiingArena {
      * @return true if there are still racers racing, false otherwise
      */
     public boolean playTurn() {
-        if (snowBunnies.size() == 0 && shSkiers.size() == 0 && snowbikers.size() == 0) {
+        if (getNumOfRacers() == 0) {
             return false;
         }
         ArrayList<SnowBunny> finBunny = new ArrayList<>();
@@ -182,6 +182,14 @@ public class AlpineSkiingArena {
             crossFinishLine(skier);
         }
         return true;
+    }
+
+    /**
+     * Returns the number of active racers that didn't finish the line yet.
+     * @return the number of active racers
+     */
+    private int getNumOfRacers() {
+        return snowBunnies.size() + shSkiers.size() + snowbikers.size();
     }
 
     /**

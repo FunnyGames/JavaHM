@@ -147,7 +147,7 @@ public class ExtremeSkiingArena {
      * @return true if there are still racers racing, false otherwise
      */
     public boolean playTurn() {
-        if (skiers.size() == 0 && shSkiers.size() == 0 && snSkiers.size() == 0) {
+        if (getNumOfRacers() == 0) {
             return false;
         }
         ArrayList<Skier> finSkiers = new ArrayList<>();
@@ -181,6 +181,14 @@ public class ExtremeSkiingArena {
             crossFinishLine(skier);
         }
         return true;
+    }
+
+    /**
+     * Returns the number of active racers that didn't finish the line yet.
+     * @return the number of active racers
+     */
+    private int getNumOfRacers() {
+        return skiers.size() + shSkiers.size() + snSkiers.size();
     }
 
     /**
