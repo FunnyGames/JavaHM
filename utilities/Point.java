@@ -5,6 +5,8 @@ package utilities;
  * Contains 2 fields - x and y
  * x - the first coordinate
  * y - the second coordinate
+ * @author Dima Zagorodny - 320552243
+ * @author Michal Barski - 205870934
  */
 public class Point {
     /**

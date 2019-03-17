@@ -4,6 +4,8 @@ package game;
  * A singleton class
  * Contains 1 field of competition.
  * Used to generate a race and run it, add racers and change arenas.
+ * @author Dima Zagorodny - 320552243
+ * @author Michal Barski - 205870934
  */
 public class GameEngine {
     /**

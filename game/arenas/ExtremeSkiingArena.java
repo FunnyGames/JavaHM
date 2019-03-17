@@ -9,6 +9,8 @@ import java.util.ArrayList;
 /**
  * Class Arena
  * It will run all valid racers till finish line.
+ * @author Dima Zagorodny - 320552243
+ * @author Michal Barski - 205870934
  */
 public class ExtremeSkiingArena {
     /**
